@@ -10,15 +10,14 @@ export default class App {
     this._refreshNotes();
   }
 
-  _refreshNotes ()  {
+  _refreshNotes() {
     const notes = NotesAPI.getAllNotes();
 
     this._setNotes(notes);
 
     if (notes.length > 0) {
-      this._setActiveNote(notes[0]);
+        this._setActiveNote(notes[0]);
     }
-
   }
 
   _setNotes(notes) {
@@ -57,11 +56,10 @@ export default class App {
           this._refreshNotes();
       },
       onNoteDelete: noteId => {
-          NotesAPI.deleteNote(noteId);
+          NotesAPI.onNoteDelete(noteId);
           this._refreshNotes();
       },
-  };
+    };
   }
-
 
 }

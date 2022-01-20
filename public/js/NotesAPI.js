@@ -7,7 +7,7 @@ const NotesAPI = class {
     });
   }
 
-  static saveNotes(noteToSave) {
+  static saveNote(noteToSave) {
     const notes = NotesAPI.getAllNotes();
     const existing = notes.find(note => note.id === noteToSave.id);
     
