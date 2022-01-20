@@ -36,7 +36,7 @@ export default class NotesView {
     });
 
     // TODO: hide the note preview by default
-
+    //console.log(this._createListItemHTML(1234, 'titulo', 'desc', new Date()));
   }
 
   _createListItemHTML(id, title, body, updated) {
@@ -44,16 +44,29 @@ export default class NotesView {
 
     return `
       <div class="notes__list-item" data-note-id="${id}">
-        <div class="notes__smal-title">${title}</div>
-        <div class="notes__smal-body">
-          ${body.substring(0, MAX_BODY_LENGTH)}
-          ${body.length > MAX_BODY_LENGTH ? "..." : ""}
-        </div>
-        <div class="notes__smal-updated">
-          ${updated.toLocalString(undefined, { dateStyle: "full", timeStyle: "short"})}
-        </div>
+          <div class="notes__small-title">${title}</div>
+          <div class="notes__small-body">
+              ${body.substring(0, MAX_BODY_LENGTH)}
+              ${body.length > MAX_BODY_LENGTH ? "..." : ""}
+          </div>
+          <div class="notes__small-updated">
+              ${updated.toLocaleString(undefined, { dateStyle: "full", timeStyle: "short" })}
+          </div>
       </div>
     `;
+  }
+
+  updateNoteList(notes) {
+    const notesListContainer = this.root.querySelector(".notes__list");
+  
+    //Empty list
+    notesListContainer.innerHTML = "";
+   
+    for (const note of notes) {
+      const html = this._createListItemHTML(note.id, note.title, note.body, new Date(note.updated));
+
+      notesListContainer.insertAdjacentHTML("beforeend", html);
+    }
   }
 
 }
