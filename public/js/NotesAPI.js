@@ -1,4 +1,4 @@
-export default class NotesAPI {
+const NotesAPI = class {
   static getAllNotes() {
     const notes = JSON.parse(localStorage.getItem("notesapp-notes") || "[]");
 
@@ -30,5 +30,4 @@ export default class NotesAPI {
     localStorage.setItem("notesapp-notes", JSON.stringify(newNotes));
   }
 }
-
-/* Aqui esta a regra de negocio */
+export default NotesAPI
