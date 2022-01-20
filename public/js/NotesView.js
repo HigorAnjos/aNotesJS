@@ -35,7 +35,7 @@ export default class NotesView {
       });
     });
 
-    this.updateNotePreviewVisibility(false);
+    //this.updateNotePreviewVisibility(false);
 
   }
 
@@ -61,7 +61,7 @@ export default class NotesView {
   
     //Empty list
     notesListContainer.innerHTML = "";
-   
+    
     for (const note of notes) {
       const html = this._createListItemHTML(note.id, note.title, note.body, new Date(note.updated));
 
