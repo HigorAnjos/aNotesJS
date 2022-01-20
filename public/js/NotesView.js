@@ -36,7 +36,6 @@ export default class NotesView {
     });
 
     // TODO: hide the note preview by default
-    //console.log(this._createListItemHTML(1234, 'titulo', 'desc', new Date()));
   }
 
   _createListItemHTML(id, title, body, updated) {
@@ -67,6 +66,39 @@ export default class NotesView {
 
       notesListContainer.insertAdjacentHTML("beforeend", html);
     }
+
+    // Add select/delete events for each list item
+    notesListContainer.querySelectorAll(".notes__list-item")
+      .forEach((noteListItem) => { 
+        noteListItem.addEventListener("click", () => {
+          this.onNoteSelect(noteListItem.dataset.noteId);
+        })
+
+        noteListItem.addEventListener("dblclick", () => {
+          const doDelete = confirm("Certeza de que deseja deletar essa nota?")
+          if (doDelete) {
+            this.onNoteDelete(noteListItem.dataset.noteId);
+          }
+        });
+
+      });
+
+    
   }
+
+  updateActiveNote (note) {
+    this.root.querySelector(".notes__title").value = note.title;
+    this.root.querySelector(".notes__body").value = note.body;
+
+    this.root.querySelectorAll(".notes__list-item")
+      .forEach(noteListItem => {
+        noteListItem.classList.remove("notes__list-item--selected");
+      })
+
+    this.root.querySelector(`.notes__list-item[data-note-id="${note.id}"]`)
+      .classList.add("notes__list-item--selected");
+  }
+
+  //updateNotePreviewVisibility()
 
 }

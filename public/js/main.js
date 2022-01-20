@@ -6,10 +6,19 @@ const view = new NotesView(app, {
   onNoteAdd() {
     console.log(" Funcao para o addNote")
   },
+  onNoteSelect(id) {
+    console.log("Note Selected: ", + id)
+  },
   onNoteEdit(newTitle, newBody) {
     console.log(newTitle)
     console.log(newBody)
+  },
+  onNoteDelete (id) {
+    console.log("Note DELETED" + id);
   }
 });
 
-view.updateNoteList(NotesAPI.getAllNotes());
+const notes = NotesAPI.getAllNotes();
+
+view.updateNoteList(notes);
+view.updateActiveNote(notes[0]);
