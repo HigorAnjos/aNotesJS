@@ -12,7 +12,6 @@ export default class App {
 
   _refreshNotes() {
     const notes = NotesAPI.getAllNotes();
-
     this._setNotes(notes);
 
     if (notes.length > 0) {
@@ -34,30 +33,30 @@ export default class App {
   _hendlers() {
     return {
       onNoteSelect: noteId => {
-          const selectedNote = this.notes.find(note => note.id == noteId);
-          this._setActiveNote(selectedNote);
+        const selectedNote = this.notes.find(note => note.id == noteId);
+        this._setActiveNote(selectedNote);
       },
       onNoteAdd: () => {
-          const newNote = {
-              title: "New Note",
-              body: "Take note..."
-          };
+        const newNote = {
+            title: "New Note",
+            body: "Take note..."
+        };
 
-          NotesAPI.saveNote(newNote);
-          this._refreshNotes();
+        NotesAPI.saveNote(newNote);
+        this._refreshNotes();
       },
       onNoteEdit: (title, body) => {
-          NotesAPI.saveNote({
-              id: this.activeNote.id,
-              title,
-              body,
-          });
+        NotesAPI.saveNote({
+          id: this.activeNote.id,
+          title,
+          body,
+        });
 
-          this._refreshNotes();
+        this._refreshNotes();
       },
       onNoteDelete: noteId => {
-          NotesAPI.deleteNote(noteId);
-          this._refreshNotes();
+        NotesAPI.deleteNote(noteId);
+        this._refreshNotes();
       },
     };
   }

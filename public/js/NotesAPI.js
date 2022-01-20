@@ -26,7 +26,7 @@ const NotesAPI = class {
 
   static deleteNote(id) {
     const notes = NotesAPI.getAllNotes();
-    const newNotes =  notes.filter(note => note.id !== id);
+    const newNotes =  notes.filter(note => note.id != id);
     localStorage.setItem("notesapp-notes", JSON.stringify(newNotes));
   }
 }
