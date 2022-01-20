@@ -35,18 +35,32 @@ export default class App {
   _hendlers() {
     return {
       onNoteSelect: noteId => {
-        console.log("Nota selecionada:", noteId)
+          const selectedNote = this.notes.find(note => note.id == noteId);
+          this._setActiveNote(selectedNote);
       },
       onNoteAdd: () => {
-        console.log("Nota ADD")
+          const newNote = {
+              title: "New Note",
+              body: "Take note..."
+          };
+
+          NotesAPI.saveNote(newNote);
+          this._refreshNotes();
       },
       onNoteEdit: (title, body) => {
-        console.log(title, body)
+          NotesAPI.saveNote({
+              id: this.activeNote.id,
+              title,
+              body
+          });
+
+          this._refreshNotes();
       },
       onNoteDelete: noteId => {
-        console.log("Nota DeLETE:", noteId)
-      }
-    };
+          NotesAPI.deleteNote(noteId);
+          this._refreshNotes();
+      },
+  };
   }
 
 
