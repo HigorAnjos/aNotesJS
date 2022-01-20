@@ -50,13 +50,13 @@ export default class App {
           NotesAPI.saveNote({
               id: this.activeNote.id,
               title,
-              body
+              body,
           });
 
           this._refreshNotes();
       },
       onNoteDelete: noteId => {
-          NotesAPI.onNoteDelete(noteId);
+          NotesAPI.deleteNote(noteId);
           this._refreshNotes();
       },
     };
